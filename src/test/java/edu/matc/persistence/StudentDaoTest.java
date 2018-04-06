@@ -29,16 +29,16 @@ public class StudentDaoTest {
     }
 
     @Test
-    void getAccountsByLastNameSuccess() {
-        List<Student> students = genericDao.getAccountsByLastName("n");
-        assertEquals(5, students.size());
+    void getStudentByLastNameSuccess() {
+        List<Student> students = genericDao.getByLastName("o");
+        assertEquals(4, students.size());
     }
 
     @Test
     void getByIdSuccess() {
         Student retrievedAccount = (Student)genericDao.getById(3);
         assertNotNull(retrievedAccount);
-        assertEquals("Barney", retrievedAccount.getFirst_name());
+        assertEquals("Kimmy", retrievedAccount.getFirst_name());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class StudentDaoTest {
        Student insertedStudent = (Student)genericDao.getById(id);
        assertEquals("Alex", insertedStudent.getFirst_name());
        assertNotNull(insertedStudent.getAccountant());
-       assertEquals("Joe", insertedStudent.getAccountant().getFirstName());
+       assertEquals("Joe", insertedStudent.getAccountant().getFirst_name());
 
     }
 
@@ -81,14 +81,14 @@ public class StudentDaoTest {
 
     @Test
     void getByPropertyEqualSuccess() {
-        List<Student> students = genericDao.getByPropertyEqual("firstName", "Barney");
+        List<Student> students = genericDao.getByPropertyEqual("first_name", "Rachel");
         assertEquals(1, students.size());
-        assertEquals(3, students.get(0).getId());
+        assertEquals(1, students.get(0).getId());
     }
 
     @Test
     void getByPropertyLikeSuccess() {
-        List<Student> students = genericDao.getByPropertyLike("firstName", "b");
+        List<Student> students = genericDao.getByPropertyLike("first_name", "r");
         assertEquals(3, students.size());
     }
 }

@@ -151,20 +151,20 @@ public class GenericDao<T> {
 
     /**
      * Gets all entity by last name.
-     * @param lastName the last name to search by
+     * @param last_name the last name to search by
      * @return the all users
      */
-    public List<T> getAccountsByLastName(String lastName) {
+    public List<T> getByLastName(String last_name) {
 
-        logger.debug("Searching for: {}", lastName);
+        logger.debug("Searching for: {}", last_name);
 
         Session session = getSession();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
-        Expression<String> propertyPath = root.get("lastName");
-        query.where(builder.like(propertyPath, "%" + lastName + "%"));
+        Expression<String> propertyPath = root.get("last_name");
+        query.where(builder.like(propertyPath, "%" + last_name + "%"));
         List<T> entity = session.createQuery(query).getResultList();
         session.close();
         return entity;

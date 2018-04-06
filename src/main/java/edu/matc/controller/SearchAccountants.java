@@ -21,7 +21,7 @@ import java.io.IOException;
         urlPatterns = {"/searchAccountant"}
 )
 
-public class SearchStudent extends HttpServlet {
+public class SearchAccountants extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -29,7 +29,7 @@ public class SearchStudent extends HttpServlet {
         GenericDao accountantDao = new GenericDao(Accountant.class);
 
         if (req.getParameter("submit").equals("search")) {
-            req.setAttribute("accountants", accountantDao.getAccountsByLastName(req.getParameter("searchTerm")));
+            req.setAttribute("accountants", accountantDao.getByLastName(req.getParameter("searchTerm")));
         } else {
             req.setAttribute("accountants", accountantDao.getAll());
         }

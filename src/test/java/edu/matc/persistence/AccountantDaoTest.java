@@ -30,8 +30,8 @@ public class AccountantDaoTest {
     }
 
     @Test
-    void getAccountsByLastNameSuccess() {
-        List<Accountant> accountants = genericDao.getAccountsByLastName("c");
+    void getAccountantsByLastNameSuccess() {
+        List<Accountant> accountants = genericDao.getByLastName("c");
         assertEquals(3, accountants.size());
     }
 
@@ -39,13 +39,13 @@ public class AccountantDaoTest {
     void getByIdSuccess() {
         Accountant retrievedAccount = (Accountant)genericDao.getById(3);
         assertNotNull(retrievedAccount);
-        assertEquals("Barney", retrievedAccount.getFirstName());
+        assertEquals("Barney", retrievedAccount.getFirst_name());
     }
 
     @Test
     void insertSuccess() {
 
-        Accountant newAccountant = new Accountant("Alex", "Flintstone",
+        Accountant newAccountant = new Accountant("Alex", "Flintstone", "aflintstone",
                 "flintstonealex@rocketmail.com", "alex", "4320 North Gammon Road",
                 "608-353-4499");
 
@@ -55,13 +55,13 @@ public class AccountantDaoTest {
 
         Accountant insertedAccountant = (Accountant)genericDao.getById(id);
 
-        assertEquals("Alex", insertedAccountant.getFirstName());
+        assertEquals("Alex", insertedAccountant.getFirst_name());
     }
 
     @Test
     void insertWithStudentSuccess() {
 
-        Accountant newAccountant = new Accountant("Alex", "Flintstone",
+        Accountant newAccountant = new Accountant("Alex", "Flintstone", "aflintstone",
                     "flintstonealex@rocketmail.com", "alex", "4320 North Gammon Road",
                     "608-353-4499");
 
@@ -86,7 +86,7 @@ public class AccountantDaoTest {
         int id = genericDao.insert(newAccountant);
         assertNotEquals(0, id);
         Accountant insertedAccountant = (Accountant)genericDao.getById(id);
-        assertEquals("Alex", insertedAccountant.getFirstName());
+        assertEquals("Alex", insertedAccountant.getFirst_name());
         assertEquals(1, insertedAccountant.getStudents().size());
 
     }
@@ -101,7 +101,7 @@ public class AccountantDaoTest {
     void updateSuccess() {
         String newLastName = "Davis";
         Accountant accountantToUpdate = (Accountant)genericDao.getById(3);
-        accountantToUpdate.setLastName(newLastName);
+        accountantToUpdate.setLast_name(newLastName);
         genericDao.saveOrUpdate(accountantToUpdate);
         Accountant retrievedAccountant = (Accountant)genericDao.getById(3);
         assertEquals(accountantToUpdate, retrievedAccountant);
@@ -109,14 +109,14 @@ public class AccountantDaoTest {
 
     @Test
     void getByPropertyEqualSuccess() {
-        List<Accountant> accountants = genericDao.getByPropertyEqual("lastName", "Curry");
+        List<Accountant> accountants = genericDao.getByPropertyEqual("last_name", "Curry");
         assertEquals(1, accountants.size());
         assertEquals(3, accountants.get(0).getId());
     }
 
     @Test
     void getByPropertyLikeSuccess() {
-        List<Accountant> accountants = genericDao.getByPropertyLike("lastName", "c");
+        List<Accountant> accountants = genericDao.getByPropertyLike("last_name", "c");
         assertEquals(3, accountants.size());
     }
 }

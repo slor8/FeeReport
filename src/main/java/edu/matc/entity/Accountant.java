@@ -20,10 +20,13 @@ public class Accountant {
     private int id;
 
     @Column(name = "first_name")
-    private String firstName;
+    private String first_name;
 
     @Column(name = "last_name")
-    private String lastName;
+    private String last_name;
+
+    @Column(name = "user_name")
+    private String user_name;
 
     @Column(name = "email")
     private String email;
@@ -33,7 +36,6 @@ public class Accountant {
 
     @Column(name = "address")
     private String address;
-
 
     @Column(name = "contact")
     private String contact;
@@ -47,19 +49,23 @@ public class Accountant {
     public Accountant() {
     }
 
+
     /**
      * Instantiates a new Accountant.
      *
-     * @param firstName the first name
-     * @param lastName  the last name
-     * @param email     the email
-     * @param password  the password
-     * @param address   the address
-     * @param contact   the contact
+     * @param first_name the first name
+     * @param last_name  the last name
+     * @param user_name  the user name
+     * @param email      the email
+     * @param password   the password
+     * @param address    the address
+     * @param contact    the contact
      */
-    public Accountant(String firstName, String lastName, String email, String password, String address, String contact) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Accountant(String first_name, String last_name, String user_name, String email, String password,
+                      String address, String contact) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.user_name = user_name;
         this.email = email;
         this.password = password;
         this.address = address;
@@ -84,22 +90,12 @@ public class Accountant {
         this.id = id;
     }
 
-    /**
-     * Gets first name.
-     *
-     * @return the first name
-     */
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    /**
-     * Sets first name.
-     *
-     * @param firstName the first name
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
     /**
@@ -107,17 +103,25 @@ public class Accountant {
      *
      * @return the last name
      */
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
     /**
      * Sets last name.
      *
-     * @param lastName the last name
+     * @param last_name the last name
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     /**
@@ -224,8 +228,9 @@ public class Accountant {
     public String toString() {
         return "Accountant{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", user_name='" + user_name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +
@@ -240,8 +245,9 @@ public class Accountant {
 
         Accountant accountant = (Accountant) o;
         return id == accountant.id &&
-                Objects.equals(firstName, accountant.firstName) &&
-                Objects.equals(lastName, accountant.lastName) &&
+                Objects.equals(first_name, accountant.first_name) &&
+                Objects.equals(last_name, accountant.last_name) &&
+                Objects.equals(user_name, accountant.user_name) &&
                 Objects.equals(email, accountant.email) &&
                 Objects.equals(password, accountant.password) &&
                 Objects.equals(address, accountant.address) &&
@@ -251,6 +257,6 @@ public class Accountant {
     @Override
     public int hashCode() {
 
-        return Objects.hash(firstName, lastName, email, password, address, contact);
+        return Objects.hash(first_name, last_name, user_name, email, password, address, contact);
     }
 }
