@@ -1,0 +1,5 @@
+INSERT INTO feeReport.accountant (first_name, last_name, user_name, password, email, address, contact) VALUES ('Joe', 'Coyne', 'jcoyne', 'joe', 'joeCoyne@email.com', '910 Eagle Crest Drive', '608-345-4534');
+INSERT INTO feeReport.accountant (first_name, last_name, user_name, password, email, address, contact) VALUES ('Barney', 'Curry', 'bcurry', 'barney', 'barneyCurry@email.com', '4102 South Park Street', '608-435-5453');
+INSERT INTO feeReport.accountant (first_name, last_name, user_name, password, email, address, contact) VALUES ('Dawn', 'Tillman', 'dtillman', 'dawn', 'dawnTillman@email.com', '104 University Ave.', '608-212-2322');
+INSERT INTO feeReport.accountant (first_name, last_name, user_name, password, email, address, contact) VALUES ('Admin', 'Admin', 'admin', 'admin', 'admin@gmail.com', null, null);
+INSERT INTO feeReport.accountant (first_name, last_name, user_name, password, email, address, contact) VALUES ('See', 'Lor', 'slor', 'slor', 'slor8@madisoncollege.edu', '924 Eagle Crest Drive', '608-354-4534');

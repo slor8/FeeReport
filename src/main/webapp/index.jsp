@@ -1,11 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="taglib.jsp"%>
+<c:set var="title" value="Welcome To Fee-Report" />
+<%@include file="head.jsp"%>
+
+
 <%@include file="head.jsp"%>
 <html>
-<title>Welcome</title>
-
-<body>
-
-<c:import url="indexActual.jsp" />
-
-</body>
+    <body>
+        <c:import url="indexActual.jsp" />
+    </body>
 </html>

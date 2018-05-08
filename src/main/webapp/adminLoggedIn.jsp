@@ -1,8 +1,8 @@
 <%@include file="taglib.jsp"%>
-<c:import url="head.jsp"/>
-<html>
-    <title>Welcome</title>
+<c:set var="title" value="Welcome Admin" />
+<%@include file="head.jsp"%>
 
+<html>
     <body>
         <c:import url="adminLoggedInActual.jsp"/>
     </body>

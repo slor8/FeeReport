@@ -4,7 +4,6 @@
          version="3.1">
   <display-name>FeeReport Web Application</display-name>
 
-  <!-- Tell the server to use form-based authentication. -->
   <login-config>
     <auth-method>FORM</auth-method>
     <form-login-config>
@@ -13,11 +12,31 @@
     </form-login-config>
   </login-config>
 
-  <!-- Protect the user search page. -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>feeReportAccountant</web-resource-name>
+      <url-pattern>/welcomeAccountant</url-pattern>
+      <url-pattern>/addStudent</url-pattern>
+      <url-pattern>/addStudent.jsp</url-pattern>
+      <url-pattern>/viewStudent</url-pattern>
+      <url-pattern>/viewStudent.jsp</url-pattern>
+      <url-pattern>/searchStudent.jsp</url-pattern>
+      <url-pattern>/updateStudent.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>user</role-name>
+    </auth-constraint>
+  </security-constraint>
+
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>feeReportAdmin</web-resource-name>
       <url-pattern>/welcomeAdmin</url-pattern>
+      <url-pattern>/addAccountant</url-pattern>
+      <url-pattern>/addAccountant.jsp</url-pattern>
+      <url-pattern>/viewAccountant</url-pattern>
+      <url-pattern>/viewAccountant.jsp</url-pattern>
+      <url-pattern>/updateAccountant.jsp</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>admin</role-name>
@@ -25,7 +44,31 @@
   </security-constraint>
 
   <security-role>
+    <role-name>user</role-name>
+  </security-role>
+
+  <security-role>
     <role-name>admin</role-name>
   </security-role>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/general-error.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/general-error.jsp</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>java.io.IOException</exception-type>
+    <location>/Exception.jsp</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/Exception.jsp</location>
+  </error-page>
 
 </web-app>

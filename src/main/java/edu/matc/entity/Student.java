@@ -24,17 +24,21 @@ public class Student {
     private String address;
     private String city;
     private String state;
+    private String zipCode;
     private String phone;
 
     @ManyToOne
+    @JoinColumn(name = "accountant_id",
+        foreignKey = @ForeignKey(name = "student_accountant_id_fk"))
     private Accountant accountant;
-
-
+    
     public Student() {
     }
 
 
-    public Student(String first_name, String last_name, String email, String course, String fee, String paid, String due, String address, String city, String state, String phone, Accountant accountant) {
+    public Student(String first_name, String last_name, String email, String course,
+                    String fee, String paid, String due, String address, String city, String state, String zipCode,
+                    String phone, Accountant accountant) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -45,6 +49,7 @@ public class Student {
         this.address = address;
         this.city = city;
         this.state = state;
+        this.zipCode = zipCode;
         this.phone = phone;
         this.accountant = accountant;
     }
@@ -137,6 +142,14 @@ public class Student {
         this.state = state;
     }
 
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -167,8 +180,8 @@ public class Student {
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
+                ", zipCode'" + zipCode + '\'' +
                 ", phone='" + phone + '\'' +
-                ", accountant=" + accountant +
                 '}';
     }
 
@@ -189,13 +202,11 @@ public class Student {
                 Objects.equals(address, student.address) &&
                 Objects.equals(city, student.city) &&
                 Objects.equals(state, student.state) &&
-                Objects.equals(phone, student.phone) &&
-                Objects.equals(accountant, student.accountant);
-
+                Objects.equals(zipCode, student.zipCode) &&
+                Objects.equals(phone, student.phone); //&&
     }
 
     public int hashCode() {
-
-        return Objects.hash(id , first_name, last_name, email, course, fee, paid, due, address, city, state, phone);
+        return Objects.hash(id , first_name, last_name, email, course, fee, paid, due, address, city, state, zipCode, phone);
     }
 }

@@ -48,6 +48,38 @@ public class GenericDao<T> {
         return list;
     }
 
+    public List<T> getByPropertyEqualThan(String dueFee, int zero) {
+        Session session = getSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        query.select(root).where(builder.greaterThan(root.get(dueFee), zero));
+        List<T> entity = session.createQuery(query).getResultList();
+        session.close();
+        return entity;
+    }
+
+/**
+ *
+
+ *
+    public List<T> getByPropertyEqual(String propertyName, String value) {
+        Session session = getSession();
+
+        logger.debug("Searching for entity with " + propertyName + " = " + value);
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        query.select(root).where(builder.equal(root.get(propertyName), value));
+        List<T> entity = session.createQuery( query ).getResultList();
+
+        session.close();
+        return entity;
+    }
+**/
+
+
     /**
      * Gets a entity by id
      * @param id entity id to search by
@@ -59,6 +91,24 @@ public class GenericDao<T> {
         session.close();
         return entity;
     }
+
+
+    public List<T> getAccountantId(String value) {
+
+        Session session = getSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<String> propertyPath = root.get("user_name");
+        query.where(builder.like(propertyPath, "%" + value + "%"));
+        List<T> userId = session.createQuery(query).getResultList();
+        session.close();
+        return userId;
+    }
+
+
+
+
 
     /**
      * update entity
@@ -169,6 +219,23 @@ public class GenericDao<T> {
         session.close();
         return entity;
     }
+
+
+    public List<T> getByPropertyGreaterThan(String propertyName, int value) {
+        Session session = getSession();
+
+        logger.debug("Searching for entity with " + propertyName + " > " + value);
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        query.select(root).where(builder.greaterThan(root.get(propertyName), value));
+        List<T> entity = session.createQuery( query ).getResultList();
+
+        session.close();
+        return entity;
+    }
+
 
     /**
      * Returns an open session from the SessionFactory

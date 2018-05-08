@@ -43,6 +43,9 @@ public class Accountant {
     @OneToMany(mappedBy = "accountant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Student> students = new HashSet<>();
 
+    @OneToMany(mappedBy = "accountant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
+
     /**
      * Instantiates a new Accountant.
      */
@@ -224,6 +227,24 @@ public class Accountant {
         student.setAccountant(null);
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+        role.setAccountant(this);
+    }
+
+    public void removeRole(Role role) {
+        roles.remove(role);
+        role.setAccountant(null);
+    }
+
     @Override
     public String toString() {
         return "Accountant{" +
@@ -257,6 +278,6 @@ public class Accountant {
     @Override
     public int hashCode() {
 
-        return Objects.hash(first_name, last_name, user_name, email, password, address, contact);
+        return Objects.hash(id, first_name, last_name, user_name, email, password, address, contact);
     }
 }

@@ -1,6 +1,7 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Accountant;
+import edu.matc.entity.Role;
 import edu.matc.entity.Student;
 import edu.matc.test.util.Database;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,6 +60,30 @@ public class AccountantDaoTest {
     }
 
     @Test
+    void insertWithRoleSuccess() {
+        String userName = "admin2";
+
+        Accountant newAccountant = new Accountant("Admin2", "Admin2", userName,
+                "admin2@rocketmail.com", "admin2", "9000 North Gammon Road",
+                "608-353-0099");
+
+        String roleName = "admin";
+        Role role = new Role(newAccountant, roleName, userName);
+
+        newAccountant.addRole(role);
+
+        int id = genericDao.insert(newAccountant);
+
+        assertNotEquals(0, id);
+        Accountant insertedAccountant = (Accountant) genericDao.getById(id);
+        assertEquals(newAccountant, insertedAccountant);
+        assertEquals(1, insertedAccountant.getRoles().size());
+
+    }
+
+
+
+    @Test
     void insertWithStudentSuccess() {
 
         Accountant newAccountant = new Accountant("Alex", "Flintstone", "aflintstone",
@@ -75,11 +100,12 @@ public class AccountantDaoTest {
         String studentAddress = "203 Monroe Street";
         String studentCity = "Madison";
         String studentState = "Wisconsin";
+        String studentZipCode = "53702";
         String studentPhone = "608-344-4430";
 
         Student student = new Student(studentFirstName, studentLastName,
                     studentEmail, studentCourse, studentFee, studentPaid, studentDue, studentAddress,
-                    studentCity, studentState, studentPhone, newAccountant);
+                    studentCity, studentState, studentZipCode, studentPhone, newAccountant);
 
         newAccountant.addStudent(student);
 
@@ -99,11 +125,17 @@ public class AccountantDaoTest {
 
     @Test
     void updateSuccess() {
+
         String newLastName = "Davis";
+
         Accountant accountantToUpdate = (Accountant)genericDao.getById(3);
+
         accountantToUpdate.setLast_name(newLastName);
+
         genericDao.saveOrUpdate(accountantToUpdate);
+
         Accountant retrievedAccountant = (Accountant)genericDao.getById(3);
+
         assertEquals(accountantToUpdate, retrievedAccountant);
     }
 

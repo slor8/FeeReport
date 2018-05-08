@@ -25,20 +25,20 @@ public class StudentDaoTest {
     @Test
     void getAllStudentSuccess() {
         List<Student> students = genericDao.getAll();
-        assertEquals(6, students.size());
+        assertEquals(2, students.size());
     }
 
     @Test
     void getStudentByLastNameSuccess() {
         List<Student> students = genericDao.getByLastName("o");
-        assertEquals(4, students.size());
+        assertEquals(2, students.size());
     }
 
     @Test
     void getByIdSuccess() {
-        Student retrievedAccount = (Student)genericDao.getById(3);
+        Student retrievedAccount = (Student)genericDao.getById(1);
         assertNotNull(retrievedAccount);
-        assertEquals("Kimmy", retrievedAccount.getFirst_name());
+        assertEquals("Rachel", retrievedAccount.getFirst_name());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class StudentDaoTest {
        Accountant accountant = (Accountant)accountantDao.getById(1);
        Student newStudent = new Student("Alex", "Flintstone",
                "flintstonealex@rocketmail.com", "Writting Communcation", "1099", "1000", "99", "4320 North Gammon Road",
-               "Madison", "Wisconsin","608-353-4499", accountant);
+               "Madison", "Wisconsin","53701","608-353-4499", accountant);
        accountant.addStudent(newStudent);
 
        int id = genericDao.insert(newStudent);
@@ -65,30 +65,37 @@ public class StudentDaoTest {
 
     @Test
     void deleteSuccess() {
-        genericDao.delete(genericDao.getById(3));
-        assertNull(genericDao.getById(3));
+        genericDao.delete(genericDao.getById(2));
+        assertNull(genericDao.getById(2));
     }
 
     @Test
     void updateSuccess() {
         String newFirstName = "Brian";
-        Student studentToUpdate = (Student)genericDao.getById(3);
+        Student studentToUpdate = (Student)genericDao.getById(1);
         studentToUpdate.setLast_name(newFirstName);
         genericDao.saveOrUpdate(studentToUpdate);
-        Student retrievedStudent = (Student)genericDao.getById(3);
+        Student retrievedStudent = (Student)genericDao.getById(1);
         assertEquals(studentToUpdate, retrievedStudent);
     }
 
     @Test
     void getByPropertyEqualSuccess() {
-        List<Student> students = genericDao.getByPropertyEqual("first_name", "Rachel");
+        List<Student> students = genericDao.getByPropertyEqual("due", "0");
         assertEquals(1, students.size());
-        assertEquals(1, students.get(0).getId());
+    }
+
+    @Test
+    void getByPropertyEqualThanSuccess() {
+        List<Student> students = genericDao.getByPropertyGreaterThan("due", 0);
+        assertEquals(1, students.size());
     }
 
     @Test
     void getByPropertyLikeSuccess() {
         List<Student> students = genericDao.getByPropertyLike("first_name", "r");
-        assertEquals(3, students.size());
+        assertEquals(2, students.size());
     }
+
+
 }

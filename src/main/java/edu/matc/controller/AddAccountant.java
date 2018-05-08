@@ -1,6 +1,7 @@
 package edu.matc.controller;
 
 import edu.matc.entity.Accountant;
+import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,15 +30,32 @@ public class AddAccountant extends HttpServlet {
         Accountant accountant = new Accountant();
         GenericDao  accountantDao = new GenericDao(Accountant.class);
 
-        accountant.setFirst_name(req.getParameter("firstName"));
-        accountant.setLast_name(req.getParameter("lastName"));
-        accountant.setUser_name(req.getParameter("userName"));
-        accountant.setEmail(req.getParameter("email"));
-        accountant.setPassword(req.getParameter("password"));
-        accountant.setAddress(req.getParameter("address"));
-        accountant.setContact(req.getParameter("contact"));
+        String accountantId = req.getParameter("id");
+
+        String name = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String username = req.getParameter("userName");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String address = req.getParameter("address");
+        String contact = req.getParameter("contact");
+        String role = req.getParameter("role");
+
+        accountant.setFirst_name(name);
+        accountant.setLast_name(lastName);
+        accountant.setUser_name(username);
+        accountant.setEmail(email);
+        accountant.setPassword(password);
+        accountant.setAddress(address);
+        accountant.setContact(contact);
 
         accountantDao.insert(accountant);
+
+        Role accountantRole = new Role(accountant, username, role);
+
+        GenericDao roleDao = new GenericDao(Role.class);
+
+        roleDao.insert(accountantRole);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addAccountantSuccess.jsp");
         dispatcher.forward(req, resp);

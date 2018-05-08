@@ -1,5 +1,5 @@
 <%@include file="taglib.jsp"%>
-<c:set var="title" value="Adding Accountant Successful" />
+<c:set var="title" value="Update Accountant Successful" />
 <%@include file="head.jsp"%>
 
 <head role="banner">
@@ -19,6 +19,6 @@
 
 <div class="container">
     <div class="alert alert-success">
-        <strong>Successfully!</strong> Registered a new Fee-Report Accountant!
+        <strong>Successfully!</strong> Update!
     </div>
 </div>

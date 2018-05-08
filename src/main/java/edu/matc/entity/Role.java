@@ -15,8 +15,8 @@ public class Role {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "accountantUser_id",
-        foreignKey = @ForeignKey(name = "role_user_accountantUser_id_fk")
+    @JoinColumn(name = "accountant_id",
+        foreignKey = @ForeignKey(name = "role_accountant_id_fk")
     )
     private Accountant accountant;
 
